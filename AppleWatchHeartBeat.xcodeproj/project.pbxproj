@@ -22,6 +22,14 @@
 		20E0A1631AAF3D930031BAF1 /* AppleWatchHeartBeat WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 20E0A1481AAF3D920031BAF1 /* AppleWatchHeartBeat WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		20E0A16D1AAF3DB40031BAF1 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20E0A16C1AAF3DB40031BAF1 /* HealthKit.framework */; };
 		20E0A16F1AAF3DC50031BAF1 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20E0A16C1AAF3DB40031BAF1 /* HealthKit.framework */; };
+		C34829581AAFF2DF00E2542F /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34829571AAFF2DF00E2542F /* Node.swift */; };
+		C348295D1AAFF4AD00E2542F /* MapConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = C348295C1AAFF4AD00E2542F /* MapConfig.swift */; };
+		C365DF201AAFD77F000ABF21 /* DrawUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C365DF1F1AAFD77F000ABF21 /* DrawUtil.swift */; };
+		C365DF231AAFDACB000ABF21 /* MapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C365DF221AAFDACB000ABF21 /* MapModel.swift */; };
+		C365DF271AAFE93C000ABF21 /* AloeEase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C365DF261AAFE93C000ABF21 /* AloeEase.swift */; };
+		C365DF291AAFE955000ABF21 /* AloeTween.swift in Sources */ = {isa = PBXBuildFile; fileRef = C365DF281AAFE955000ABF21 /* AloeTween.swift */; };
+		C365DF2B1AAFE971000ABF21 /* Twen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C365DF2A1AAFE971000ABF21 /* Twen.swift */; };
+		C37FDA651AAFEC78003AE3F1 /* MapDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37FDA641AAFEC78003AE3F1 /* MapDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +94,14 @@
 		20E0A16B1AAF3DA90031BAF1 /* AppleWatchHeartBeat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = AppleWatchHeartBeat.entitlements; sourceTree = "<group>"; };
 		20E0A16C1AAF3DB40031BAF1 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		20E0A16E1AAF3DC30031BAF1 /* AppleWatchHeartBeat WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "AppleWatchHeartBeat WatchKit Extension.entitlements"; sourceTree = "<group>"; };
+		C34829571AAFF2DF00E2542F /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
+		C348295C1AAFF4AD00E2542F /* MapConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapConfig.swift; sourceTree = "<group>"; };
+		C365DF1F1AAFD77F000ABF21 /* DrawUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawUtil.swift; sourceTree = "<group>"; };
+		C365DF221AAFDACB000ABF21 /* MapModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapModel.swift; sourceTree = "<group>"; };
+		C365DF261AAFE93C000ABF21 /* AloeEase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AloeEase.swift; sourceTree = "<group>"; };
+		C365DF281AAFE955000ABF21 /* AloeTween.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AloeTween.swift; sourceTree = "<group>"; };
+		C365DF2A1AAFE971000ABF21 /* Twen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Twen.swift; sourceTree = "<group>"; };
+		C37FDA641AAFEC78003AE3F1 /* MapDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +196,12 @@
 		20E0A1491AAF3D920031BAF1 /* AppleWatchHeartBeat WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				C348295B1AAFF47C00E2542F /* config */,
+				C34829561AAFF2C700E2542F /* data */,
+				C37FDA631AAFEC61003AE3F1 /* delegate */,
+				C365DF241AAFDAE4000ABF21 /* lib */,
+				C365DF211AAFDAB7000ABF21 /* model */,
+				C365DF1E1AAFD758000ABF21 /* util */,
 				20E0A16E1AAF3DC30031BAF1 /* AppleWatchHeartBeat WatchKit Extension.entitlements */,
 				20E0A14D1AAF3D920031BAF1 /* InterfaceController.swift */,
 				20E0A14F1AAF3D920031BAF1 /* NotificationController.swift */,
@@ -214,6 +236,64 @@
 				20E0A15B1AAF3D930031BAF1 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C34829561AAFF2C700E2542F /* data */ = {
+			isa = PBXGroup;
+			children = (
+				C34829571AAFF2DF00E2542F /* Node.swift */,
+			);
+			path = data;
+			sourceTree = "<group>";
+		};
+		C348295B1AAFF47C00E2542F /* config */ = {
+			isa = PBXGroup;
+			children = (
+				C348295C1AAFF4AD00E2542F /* MapConfig.swift */,
+			);
+			path = config;
+			sourceTree = "<group>";
+		};
+		C365DF1E1AAFD758000ABF21 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				C365DF1F1AAFD77F000ABF21 /* DrawUtil.swift */,
+				C365DF2A1AAFE971000ABF21 /* Twen.swift */,
+			);
+			path = util;
+			sourceTree = "<group>";
+		};
+		C365DF211AAFDAB7000ABF21 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				C365DF221AAFDACB000ABF21 /* MapModel.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		C365DF241AAFDAE4000ABF21 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				C365DF251AAFDAF1000ABF21 /* tween */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		C365DF251AAFDAF1000ABF21 /* tween */ = {
+			isa = PBXGroup;
+			children = (
+				C365DF261AAFE93C000ABF21 /* AloeEase.swift */,
+				C365DF281AAFE955000ABF21 /* AloeTween.swift */,
+			);
+			path = tween;
+			sourceTree = "<group>";
+		};
+		C37FDA631AAFEC61003AE3F1 /* delegate */ = {
+			isa = PBXGroup;
+			children = (
+				C37FDA641AAFEC78003AE3F1 /* MapDelegate.swift */,
+			);
+			path = delegate;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -413,8 +493,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C348295D1AAFF4AD00E2542F /* MapConfig.swift in Sources */,
+				C365DF291AAFE955000ABF21 /* AloeTween.swift in Sources */,
+				C365DF2B1AAFE971000ABF21 /* Twen.swift in Sources */,
+				C365DF231AAFDACB000ABF21 /* MapModel.swift in Sources */,
+				C34829581AAFF2DF00E2542F /* Node.swift in Sources */,
 				20E0A1501AAF3D920031BAF1 /* NotificationController.swift in Sources */,
 				20E0A14E1AAF3D920031BAF1 /* InterfaceController.swift in Sources */,
+				C37FDA651AAFEC78003AE3F1 /* MapDelegate.swift in Sources */,
+				C365DF271AAFE93C000ABF21 /* AloeEase.swift in Sources */,
+				C365DF201AAFD77F000ABF21 /* DrawUtil.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -690,6 +778,7 @@
 				20E0A1401AAF3CF10031BAF1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		20E0A1411AAF3CF10031BAF1 /* Build configuration list for PBXNativeTarget "AppleWatchHeartBeatTests" */ = {
 			isa = XCConfigurationList;
@@ -698,6 +787,7 @@
 				20E0A1431AAF3CF10031BAF1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		20E0A1641AAF3D930031BAF1 /* Build configuration list for PBXNativeTarget "AppleWatchHeartBeat WatchKit App" */ = {
 			isa = XCConfigurationList;
@@ -706,6 +796,7 @@
 				20E0A1661AAF3D930031BAF1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		20E0A1671AAF3D930031BAF1 /* Build configuration list for PBXNativeTarget "AppleWatchHeartBeat WatchKit Extension" */ = {
 			isa = XCConfigurationList;
@@ -714,6 +805,7 @@
 				20E0A1691AAF3D930031BAF1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

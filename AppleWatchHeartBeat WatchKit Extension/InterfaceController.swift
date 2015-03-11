@@ -12,22 +12,24 @@ import Foundation
 class InterfaceController: WKInterfaceController {
     
     @IBOutlet weak var mainScene: WKInterfaceImage!
+    var mapModel:MapModel!
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
+        mapModel = MapModel(scene: mainScene)
         
     }
     
     override func willActivate() {
         super.willActivate()
         
-        var ary:[UIImage] = [UIImage]()
-        for (var i:Int = 0; i < 512; i++)
-        {
-            ary.append(UIImage(named: "ground.rectcheck.0")!)
-            ary.append(UIImage(named: "ground.rectcheck.1")!)
-        }
-        var image:UIImage = synthesizeImage(ary)
-        mainScene.setImage(image)
+//        var ary:[UIImage] = [UIImage]()
+//        for (var i:Int = 0; i < 512; i++)
+//        {
+//            ary.append(UIImage(named: "ground.rectcheck.0")!)
+//            ary.append(UIImage(named: "ground.rectcheck.1")!)
+//        }
+//        var image:UIImage = synthesizeImage(ary)
+//        mainScene.setImage(image)
     }
     
     override func didDeactivate() {
