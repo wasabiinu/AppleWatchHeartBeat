@@ -40,7 +40,41 @@ internal class DrawUtil {
         nodes = []
         for (var i:Int = 0; i < MapConfig.AREA_SIZE.width * MapConfig.AREA_SIZE.height; i++)
         {
-            var node:Node = Node(edges_to: [], edges_cost: [])
+            var edges_to:[Int] = [Int]()
+            var edges_cost:[Int] = [Int]()
+            
+            //上
+            if ((i - MapConfig.AREA_SIZE.width) >= 0)
+            {
+                edges_to.append(i - MapConfig.AREA_SIZE.width)
+                edges_cost.append(1)
+            }
+            
+            //左
+            if ((i % MapConfig.AREA_SIZE.width ) != 0 && (i - 1) >= 0)
+            {
+                edges_to.append(i - 1)
+                edges_cost.append(1)
+            }
+            
+            //右
+            if (((i + 1) % MapConfig.AREA_SIZE.width ) != 0 && (i + 1) < (MapConfig.AREA_SIZE.width * MapConfig.AREA_SIZE.height))
+            {
+                edges_to.append(i + 1)
+                edges_cost.append(1)
+            }
+            
+            //下
+            if ((i + MapConfig.AREA_SIZE.width) < (MapConfig.AREA_SIZE.width * MapConfig.AREA_SIZE.height))
+            {
+                edges_to.append(i + MapConfig.AREA_SIZE.width)
+                edges_cost.append(1)
+            }
+
+            
+            
+            
+            var node:Node = Node(edges_to: edges_to, edges_cost: edges_cost)
             node.type = 0
             nodes.append(node)
         }

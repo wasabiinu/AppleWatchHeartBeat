@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		20A07EDF1AB0601A00298C98 /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A07EDE1AB0601A00298C98 /* TimeManager.swift */; };
 		20E0A1251AAF3CF10031BAF1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E0A1241AAF3CF10031BAF1 /* AppDelegate.swift */; };
 		20E0A1271AAF3CF10031BAF1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E0A1261AAF3CF10031BAF1 /* ViewController.swift */; };
 		20E0A12A1AAF3CF10031BAF1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20E0A1281AAF3CF10031BAF1 /* Main.storyboard */; };
@@ -71,6 +72,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		20A07EDE1AB0601A00298C98 /* TimeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
 		20E0A11F1AAF3CF10031BAF1 /* AppleWatchHeartBeat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppleWatchHeartBeat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		20E0A1231AAF3CF10031BAF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		20E0A1241AAF3CF10031BAF1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -131,6 +133,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		20A07EDD1AB0600100298C98 /* manager */ = {
+			isa = PBXGroup;
+			children = (
+				20A07EDE1AB0601A00298C98 /* TimeManager.swift */,
+			);
+			path = manager;
+			sourceTree = "<group>";
+		};
 		20E0A1161AAF3CF10031BAF1 = {
 			isa = PBXGroup;
 			children = (
@@ -196,6 +206,7 @@
 		20E0A1491AAF3D920031BAF1 /* AppleWatchHeartBeat WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				20A07EDD1AB0600100298C98 /* manager */,
 				C348295B1AAFF47C00E2542F /* config */,
 				C34829561AAFF2C700E2542F /* data */,
 				C37FDA631AAFEC61003AE3F1 /* delegate */,
@@ -498,6 +509,7 @@
 				C365DF2B1AAFE971000ABF21 /* Twen.swift in Sources */,
 				C365DF231AAFDACB000ABF21 /* MapModel.swift in Sources */,
 				C34829581AAFF2DF00E2542F /* Node.swift in Sources */,
+				20A07EDF1AB0601A00298C98 /* TimeManager.swift in Sources */,
 				20E0A1501AAF3D920031BAF1 /* NotificationController.swift in Sources */,
 				20E0A14E1AAF3D920031BAF1 /* InterfaceController.swift in Sources */,
 				C37FDA651AAFEC78003AE3F1 /* MapDelegate.swift in Sources */,
