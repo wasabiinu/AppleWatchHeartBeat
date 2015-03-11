@@ -37,6 +37,7 @@ internal class DrawUtil {
     {
         println("DrawUtil::setDelegate")
         self.delegate = delegate
+        nodes = []
         for (var i:Int = 0; i < MapConfig.AREA_SIZE.width * MapConfig.AREA_SIZE.height; i++)
         {
             var node:Node = Node(edges_to: [], edges_cost: [])

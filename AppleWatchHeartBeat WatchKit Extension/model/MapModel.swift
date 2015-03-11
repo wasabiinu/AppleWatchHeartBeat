@@ -19,14 +19,10 @@ internal class MapModel
         mainScene = scene
         
         DrawUtil.setDelegate(delegate)
-        NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("onUpdate:"), userInfo: nil, repeats: true)
+        var timeManager:TimerManager = TimerManager()
+        timeManager.start()
 
         
         //AloeTween.doTween(duration:0.042, ease: AloeEase.None, progress: DrawUtil.draw())
-    }
-    
-    private func onUpdate()
-    {
-        DrawUtil.draw()
     }
 }
