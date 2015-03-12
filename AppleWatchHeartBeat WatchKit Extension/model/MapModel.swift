@@ -11,7 +11,7 @@ import WatchKit
 
 internal class MapModel
 {
-    var mainScene: WKInterfaceImage!
+    internal var mainScene: WKInterfaceImage!
     internal var delegate:MapDelegate!
     init (scene:WKInterfaceImage)
     {

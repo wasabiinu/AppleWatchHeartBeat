@@ -19,13 +19,30 @@ internal class MapConfig
         }
     }
     
+    internal class var SCREEN_SIZE:ScreenSize
+        {
+        set {
+        ClassProperty.screenSize = newValue
+        }
+        get {
+            return ClassProperty.screenSize
+        }
+    }
+    
     private struct ClassProperty {
         static var areaSize:AreaSize! = AreaSize()
+        static var screenSize:ScreenSize = ScreenSize()
     }
     
     internal struct AreaSize
     {
         var width:Int = 32
         var height:Int = 32
+    }
+    
+    internal struct ScreenSize
+    {
+        var width:Int = 150
+        var height:Int = 150
     }
 }

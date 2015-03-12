@@ -15,12 +15,12 @@ class InterfaceController: WKInterfaceController {
     var mapModel:MapModel!
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
-        mapModel = MapModel(scene: mainScene)
         
     }
     
     override func willActivate() {
         super.willActivate()
+        mapModel = MapModel(scene: mainScene)
         
 //        var ary:[UIImage] = [UIImage]()
 //        for (var i:Int = 0; i < 512; i++)
