@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		20A07EDF1AB0601A00298C98 /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A07EDE1AB0601A00298C98 /* TimeManager.swift */; };
+		20A07EE11AB1BDC900298C98 /* RouteUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A07EE01AB1BDC900298C98 /* RouteUtil.swift */; };
+		20A07EE31AB1BDF000298C98 /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A07EE21AB1BDF000298C98 /* Random.swift */; };
 		20E0A1251AAF3CF10031BAF1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E0A1241AAF3CF10031BAF1 /* AppDelegate.swift */; };
 		20E0A1271AAF3CF10031BAF1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E0A1261AAF3CF10031BAF1 /* ViewController.swift */; };
 		20E0A12A1AAF3CF10031BAF1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20E0A1281AAF3CF10031BAF1 /* Main.storyboard */; };
@@ -73,6 +75,8 @@
 
 /* Begin PBXFileReference section */
 		20A07EDE1AB0601A00298C98 /* TimeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
+		20A07EE01AB1BDC900298C98 /* RouteUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteUtil.swift; sourceTree = "<group>"; };
+		20A07EE21AB1BDF000298C98 /* Random.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Random.swift; sourceTree = "<group>"; };
 		20E0A11F1AAF3CF10031BAF1 /* AppleWatchHeartBeat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppleWatchHeartBeat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		20E0A1231AAF3CF10031BAF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		20E0A1241AAF3CF10031BAF1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -270,6 +274,8 @@
 			children = (
 				C365DF1F1AAFD77F000ABF21 /* DrawUtil.swift */,
 				C365DF2A1AAFE971000ABF21 /* Twen.swift */,
+				20A07EE01AB1BDC900298C98 /* RouteUtil.swift */,
+				20A07EE21AB1BDF000298C98 /* Random.swift */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -506,7 +512,9 @@
 			files = (
 				C348295D1AAFF4AD00E2542F /* MapConfig.swift in Sources */,
 				C365DF291AAFE955000ABF21 /* AloeTween.swift in Sources */,
+				20A07EE31AB1BDF000298C98 /* Random.swift in Sources */,
 				C365DF2B1AAFE971000ABF21 /* Twen.swift in Sources */,
+				20A07EE11AB1BDC900298C98 /* RouteUtil.swift in Sources */,
 				C365DF231AAFDACB000ABF21 /* MapModel.swift in Sources */,
 				C34829581AAFF2DF00E2542F /* Node.swift in Sources */,
 				20A07EDF1AB0601A00298C98 /* TimeManager.swift in Sources */,

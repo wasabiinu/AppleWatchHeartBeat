@@ -40,10 +40,21 @@ internal class DrawUtil {
         }
     }
     
+    internal class var isReady:Bool
+        {
+        set {
+        ClassProperty.isReady = newValue
+        }
+        get {
+            return ClassProperty.isReady
+        }
+    }
+    
     private struct ClassProperty {
         static var delegate:MapDelegate!
         static var nodes:[Node]!
         static var mapImage:UIImage!
+        static var isReady:Bool = false
     }
     
     internal class func setDelegate(delegate:MapDelegate)
@@ -84,22 +95,54 @@ internal class DrawUtil {
                 edges_cost.append(1)
             }
             
+            
             var node:Node = Node(edges_to: edges_to, edges_cost: edges_cost)
             node.type = 0
             nodes.append(node)
         }
-        
+        deleteRandomNode()
         drawMap()
+    }
+    
+    private class func deleteRandomNode()
+    {
+        for (var n:Int = 0; n < MapConfig.AREA_SIZE.width * MapConfig.AREA_SIZE.height / 4; n++)
+        {
+            var _nodes:[Node] = nodes
+            var ary:[Node] = []
+            var rand:UInt32 = Random.random(UInt32(MapConfig.AREA_SIZE.width * MapConfig.AREA_SIZE.height))
+            var edges_to:[Int] = _nodes[Int(rand)].edges_to
+            _nodes[Int(rand)].edges_cost = []
+            _nodes[Int(rand)].edges_to = []
+            var isArrival:Bool = true
+            for (var i:Int = 0; i < edges_to.count; i++)
+            {
+                if (RouteUtil.getArrival(_nodes, start: 0, goal: MapConfig.AREA_SIZE.width * MapConfig.AREA_SIZE.height - 1) == false)
+                {
+                    isArrival = false
+                    break
+                }
+            }
+            
+            
+            if (isArrival == true)
+            {
+                _nodes[Int(rand)].type = 1
+                nodes = _nodes
+            }
+        }
     }
     
     internal class func drawMap()
     {
+        println("drawMap")
         var ary:[UIImage] = [UIImage]()
         var rectSize:CGSize = CGSizeMake(CGFloat(Int(MapConfig.SCREEN_SIZE.width / MapConfig.AREA_SIZE.width)), CGFloat(Int(MapConfig.SCREEN_SIZE.height / MapConfig.AREA_SIZE.height)))
         
+        
         for (var i:Int = 0; i < nodes.count; i++)
         {
-            UIGraphicsBeginImageContext(rectSize)
+            UIGraphicsBeginImageContext(CGSizeMake(CGFloat(MapConfig.SCREEN_SIZE.width), CGFloat(MapConfig.SCREEN_SIZE.height)))
             var cgContextRef = UIGraphicsGetCurrentContext()
             
             //typeによって色を使い分ける
@@ -120,24 +163,32 @@ internal class DrawUtil {
         }
         
         self.mapImage = synthesizeImage(ary)
+        isReady = true
+        draw()
     }
     
     internal class func draw()
     {
-        delegate.model.mainScene.setImage(mapImage)
-        println("DrawUtil.draw")
+        if(isReady == true)
+        {
+            println("draw")
+            delegate.model.mainScene.setImage(mapImage)
+        }
     }
     
     private class func synthesizeImage(ary: [UIImage]) -> UIImage {
+        println("synthesizeImage")
         
         UIGraphicsBeginImageContextWithOptions(CGSizeMake(150,150), false, 0.0);
-        for (var i:Int = 0; i < 512; i++)
+        for (var i:Int = 0; i < ary.count; i++)
         {
             var image:UIImage = ary[i]
-            image.drawInRect(CGRectMake(CGFloat(i), CGFloat(i), image.size.width, image.size.height))
+            image.drawInRect(CGRectMake(0, 0, image.size.width, image.size.height))
         }
         let newImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
+        
+        println("end synthesizeImage")
         return newImage
     }
 }

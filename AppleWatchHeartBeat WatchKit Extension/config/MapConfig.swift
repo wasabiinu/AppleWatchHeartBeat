@@ -10,34 +10,41 @@ import Foundation
 internal class MapConfig
 {
     internal class var AREA_SIZE:AreaSize
+    {
+        get
         {
-        set {
-        ClassProperty.areaSize = newValue
-        }
-        get {
             return ClassProperty.areaSize
         }
     }
     
     internal class var SCREEN_SIZE:ScreenSize
+    {
+        get
         {
-        set {
-        ClassProperty.screenSize = newValue
-        }
-        get {
             return ClassProperty.screenSize
         }
     }
     
+    internal class var REFRESH_RATE:Int
+    {
+        get
+        {
+            return ClassProperty.refreshRate
+        }
+    }
+    
+    
+    
     private struct ClassProperty {
         static var areaSize:AreaSize! = AreaSize()
         static var screenSize:ScreenSize = ScreenSize()
+        static var refreshRate:Int = 24
     }
     
     internal struct AreaSize
     {
-        var width:Int = 32
-        var height:Int = 32
+        var width:Int = 16
+        var height:Int = 16
     }
     
     internal struct ScreenSize
