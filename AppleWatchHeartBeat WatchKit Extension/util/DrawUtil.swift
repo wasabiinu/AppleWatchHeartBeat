@@ -108,13 +108,13 @@ internal class DrawUtil {
             {
                 if (isOuterWall(upperGrid))
                 {
-                    //外周が含まれているか、既にwallsに追加する
+                    //外周が含まれていたらwallsに追加する
                     walls.append(upperGrid)
                 }
                 else if (isRoute(upperGrid, route: route))
                 {
                     //壁にも追加する
-                    //walls.append(upperGrid)
+                    walls.append(upperGrid)
                 }
                 else
                 {
