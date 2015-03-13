@@ -67,41 +67,11 @@ internal class DrawUtil {
             var edges_to:[Int] = [Int]()
             var edges_cost:[Int] = [Int]()
             
-            //上
-//            if ((i - MapConfig.AREA_SIZE.width) >= 0)
-//            {
-//                edges_to.append(i - MapConfig.AREA_SIZE.width)
-//                edges_cost.append(1)
-//            }
-//            
-//            //左
-//            if ((i % MapConfig.AREA_SIZE.width ) != 0 && (i - 1) >= 0)
-//            {
-//                edges_to.append(i - 1)
-//                edges_cost.append(1)
-//            }
-//            
-//            //右
-//            if (((i + 1) % MapConfig.AREA_SIZE.width ) != 0 && (i + 1) < (MapConfig.AREA_SIZE.width * MapConfig.AREA_SIZE.height))
-//            {
-//                edges_to.append(i + 1)
-//                edges_cost.append(1)
-//            }
-//            
-//            //下
-//            if ((i + MapConfig.AREA_SIZE.width) < (MapConfig.AREA_SIZE.width * MapConfig.AREA_SIZE.height))
-//            {
-//                edges_to.append(i + MapConfig.AREA_SIZE.width)
-//                edges_cost.append(1)
-//            }
-            
-            
             var node:Node = Node(edges_to: edges_to, edges_cost: edges_cost)
             node.type = 1
             nodes.append(node)
         }
         diggNodes()
-//        deleteRandomNode()
         drawMap()
     }
     
@@ -111,6 +81,7 @@ internal class DrawUtil {
         var now:Int = -1
         var areaSize:Int = MapConfig.AREA_SIZE.width * MapConfig.AREA_SIZE.height
         var route:[Int] = [Int]()
+        var returns:[Int] = [Int]()
         
         //外周以外の1点をスタート地点に指定する
         while (isOuterWall(start))
@@ -118,61 +89,187 @@ internal class DrawUtil {
             start = Int(Random.random(UInt32(areaSize)))
         }
         
-        route.append(start)
-        now = start
         
-        var isMovable:Bool = false
-        while (isMovable == false)
+        now = start
+        var isEnd:Bool = false
+        
+        for(var i:Int = 0; i < MapConfig.AREA_SIZE.width * MapConfig.AREA_SIZE.height * 2 || isEnd == true; i++)
         {
+            //繰り返しここから
+            
+            route.append(now)
+            returns.append(now)
             var walls:[Int] = [Int]()
-            var passages:[Int] = [Int]()
+            var neighbors:[Int] = [Int]()
             //進んできたグリッド(routeに含まれるもの)を除いた四方向のどれかの壁を掘る
-            //戻れなくなったら終了する
-            //外周が含まれていたらwallsに追加する
-            //wallsが3つになったら、一つ前に戻る
-            //wallsに含まれていないグリッドを、passagesに追加する
-            //passagesから、ランダムで1つ選んで、edges_toに追加する
-            //同じ値を、routeにも追加する
-            //同じ値を、nowに入れて、処理を最初から繰り返す
-            var rand:Int = Int(Random.random(3))
-            switch (rand)
+            //上
+            var upperGrid:Int = now - MapConfig.AREA_SIZE.width
+            if (upperGrid >= 0)
             {
-                case 0:
-                    //外周だったらやりなおす
-                    if (isOuterWall(rand))
+                if (isOuterWall(upperGrid))
+                {
+                    //外周が含まれているか、既にwallsに追加する
+                    walls.append(upperGrid)
+                }
+                else if (isRoute(upperGrid, route: route))
+                {
+                    //壁にも追加する
+                    //walls.append(upperGrid)
+                }
+                else
+                {
+                    //wallsに含まれていないグリッドを、neighborsに追加する
+                    neighbors.append(upperGrid)
+                }
+            }
+            
+            //下
+            var lowerGrid:Int = now + MapConfig.AREA_SIZE.width
+            if (lowerGrid < MapConfig.AREA_SIZE.width * MapConfig.AREA_SIZE.height)
+            {
+                if (isOuterWall(lowerGrid))
+                {
+                    //外周が含まれていたらwallsに追加する
+                    walls.append(lowerGrid)
+                }
+                else if (isRoute(lowerGrid, route: route))
+                {
+                    //壁に追加する
+                    //walls.append(lowerGrid)
+                }
+                else
+                {
+                    //wallsに含まれていないグリッドを、neighborsに追加する
+                    neighbors.append(lowerGrid)
+                }
+            }
+            
+            //左
+            var leftGrid:Int = now - 1
+            if (isOuterWall(leftGrid))
+            {
+                //外周が含まれていたらwallsに追加する
+                walls.append(leftGrid)
+            }
+            else if (isRoute(leftGrid, route: route))
+            {
+                //壁に追加する
+                walls.append(leftGrid)
+            }
+            else
+            {
+                //wallsに含まれていないグリッドを、neighborsに追加する
+                neighbors.append(leftGrid)
+            }
+            
+            //右
+            var rightGrid:Int = now + 1
+            if (isOuterWall(rightGrid))
+            {
+                //外周が含まれていたらwallsに追加する
+                walls.append(rightGrid)
+            }
+            else if (isRoute(rightGrid, route: route))
+            {
+                //壁に追加する
+                walls.append(rightGrid)
+            }
+            else
+            {
+                //wallsに含まれていないグリッドを、neighborsに追加する
+                neighbors.append(rightGrid)
+            }
+            
+            
+            //戻れなくなったら終了する
+            
+            //wallsが3つになったら、一つ前に戻る
+            if (walls.count >= 3)
+            {
+                
+                var count:Int = returns.count - 1
+                if(returns.count - 1 < 0)
+                {
+                    break
+                }
+                while(returns[count] == now)
+                {
+                    returns.removeLast()
+                    count = returns.count - 1
+                    if (count < 0)
                     {
+                        isEnd = true
                         break
                     }
-                    
+                }
+                
+                if (count < 0)
+                {
+                    isEnd = true
+                    break
+                }
+                now = returns[count]
+            }
+            else if (neighbors.count <= 0)
+            {
+                isEnd = true
                 break
-                case 1:
-                    //外周だったらやりなおす
-                    if (isOuterWall(rand))
-                    {
-                        break
-                    }
-                break
-                case 2:
-                    //外周だったらやりなおす
-                    if (isOuterWall(rand))
-                    {
-                        break
-                    }
-                    
-                break
-                default:
-                    //外周だったらやりなおす
-                    if (isOuterWall(rand))
-                    {
-                        break
-                    }
-                break
+            }
+            else
+            {
+                
+                //neighborsから、ランダムで1つ選んで、edges_toに追加する
+                var next:Int = neighbors[Int(Random.random(UInt32(neighbors.count - 1)))]
+                nodes[now].edges_to.append(next)
+                
+                nodes[now].type = 0
+                
+                if (isEqualEdgeNo(now, edges_to: nodes[next].edges_to) == false)
+                {
+                    nodes[next].edges_to.append(now)
+                }
+                
+                if (isEqualEdgeNo(next, edges_to: nodes[now].edges_to) == false)
+                {
+                    nodes[now].edges_to.append(next)
+                }
+                
+                //同じ値を、nowに入れて、処理を最初から繰り返す
+                now = next
+            }
+            
+        }
+        
+        var end:Int = now
+    }
+    
+    private class func isEqualEdgeNo(no:Int, edges_to:[Int]) -> Bool
+    {
+        var isEqual:Bool = false
+        for edgeNum in edges_to
+        {
+            if (edgeNum == no)
+            {
+                isEqual = true
             }
         }
         
+        return isEqual
     }
     
-    private class func isOuterWall(num:Int)->Bool
+    private class func isRoute(grid:Int, route:[Int]) -> Bool
+    {
+        for num in route
+        {
+            if (num == grid)
+            {
+                return true
+            }
+        }
+        return false
+    }
+    
+    private class func isOuterWall(num:Int) -> Bool
     {
         return num < 0 ||
             num % MapConfig.AREA_SIZE.width == 0 || //左端
@@ -214,29 +311,118 @@ internal class DrawUtil {
     {
         println("drawMap")
         var ary:[UIImage] = [UIImage]()
+        
         var rectSize:CGSize = CGSizeMake(CGFloat(Int(MapConfig.SCREEN_SIZE.width / MapConfig.AREA_SIZE.width)), CGFloat(Int(MapConfig.SCREEN_SIZE.height / MapConfig.AREA_SIZE.height)))
+        
+        UIGraphicsBeginImageContext(CGSizeMake(CGFloat(MapConfig.SCREEN_SIZE.width), CGFloat(MapConfig.SCREEN_SIZE.height)))
+        var bgCgContextRef = UIGraphicsGetCurrentContext()
+        var bgImage:UIImage = UIImage(named: "chipbg.png")!
+        
+        
+        let bgOrigRef    = bgImage.CGImage;
+        let bgOrigWidth  = Int(CGImageGetWidth(bgOrigRef))
+        let bgOrigHeight = Int(CGImageGetHeight(bgOrigRef))
+        var bgResizeWidth:Int = 0, bgResizeHeight:Int = 0
+        
+        if (bgOrigWidth < bgOrigHeight) {
+            bgResizeWidth = Int(rectSize.width) * MapConfig.AREA_SIZE.width
+            bgResizeHeight = bgOrigHeight * bgResizeWidth / bgOrigWidth
+        } else {
+            bgResizeHeight = Int(rectSize.height) * MapConfig.AREA_SIZE.height
+            bgResizeWidth = bgOrigWidth * bgResizeHeight / bgOrigHeight
+        }
+        
+        var diffX:Int = MapConfig.SCREEN_SIZE.width - Int(rectSize.width) * MapConfig.AREA_SIZE.width
+        var diffY:Int = MapConfig.SCREEN_SIZE.height - Int(rectSize.height) * MapConfig.AREA_SIZE.height
+        
+        bgImage.drawInRect(CGRectMake(CGFloat(diffX / 2), CGFloat(diffY / 2), CGFloat(bgResizeWidth), CGFloat(bgResizeHeight)))
+        
+        let resizeBgImage = UIGraphicsGetImageFromCurrentImageContext()
+        
+        UIGraphicsEndImageContext()
+        
+        ary.append(resizeBgImage)
         
         
         for (var i:Int = 0; i < nodes.count; i++)
         {
+            
+            var x:CGFloat = CGFloat(i % MapConfig.AREA_SIZE.width) * rectSize.width + CGFloat(diffX / 2)
+            var y:CGFloat = CGFloat(i / MapConfig.AREA_SIZE.width) * rectSize.height + CGFloat(diffY / 2)
+            
             UIGraphicsBeginImageContext(CGSizeMake(CGFloat(MapConfig.SCREEN_SIZE.width), CGFloat(MapConfig.SCREEN_SIZE.height)))
             var cgContextRef = UIGraphicsGetCurrentContext()
             
-            //typeによって色を使い分ける
-            if (nodes[i].type == 0)
+            var wall:Int = 1111
+            var edges_to:[Int] = nodes[i].edges_to
+            
+            for num in edges_to
             {
-                CGContextSetFillColorWithColor(cgContextRef, UIColor.greenColor().CGColor)
+                //下
+                if (num == i + MapConfig.AREA_SIZE.width)
+                {
+                    wall -= 1000
+                }
+                //右
+                else if(num == i + 1)
+                {
+                    wall -= 100
+                }
+                //上
+                else if(num == i - MapConfig.AREA_SIZE.width)
+                {
+                    wall -= 10
+                }
+                //左
+                else if(num == i - 1)
+                {
+                    wall -= 1
+                }
+            }
+            
+            var wallString:String = ""
+            if (wall < 10)
+            {
+                wallString = "000" + String(wall)
+            }
+            else if(wall < 100)
+            {
+                wallString = "00" + String(wall)
+            }
+            else if(wall < 1000)
+            {
+                wallString = "0" + String(wall)
             }
             else
             {
-                CGContextSetFillColorWithColor(cgContextRef, UIColor.brownColor().CGColor)
+                wallString = String(wall)
             }
             
-            var x:CGFloat = CGFloat(i % MapConfig.AREA_SIZE.width) * rectSize.width
-            var y:CGFloat = CGFloat(i / MapConfig.AREA_SIZE.width) * rectSize.height
-            CGContextFillRect(cgContextRef, CGRectMake(x, y, rectSize.width, rectSize.height))
-            var image = UIGraphicsGetImageFromCurrentImageContext()
-            ary.append(image)
+            var chipName:String = "chip" + wallString + ".png"
+            
+            var image:UIImage = UIImage(named: chipName)!
+            
+            
+            let origRef    = image.CGImage;
+            let origWidth  = Int(CGImageGetWidth(origRef))
+            let origHeight = Int(CGImageGetHeight(origRef))
+            var resizeWidth:Int = 0, resizeHeight:Int = 0
+            
+            if (origWidth < origHeight) {
+                resizeWidth = Int(rectSize.width)
+                resizeHeight = origHeight * resizeWidth / origWidth
+            } else {
+                resizeHeight = Int(rectSize.height)
+                resizeWidth = origWidth * resizeHeight / origHeight
+            }
+            
+            image.drawInRect(CGRectMake(x, y, CGFloat(resizeWidth), CGFloat(resizeHeight)))
+            
+            let resizeImage = UIGraphicsGetImageFromCurrentImageContext()
+            
+            UIGraphicsEndImageContext()
+            
+            ary.append(resizeImage)
         }
         
         self.mapImage = synthesizeImage(ary)

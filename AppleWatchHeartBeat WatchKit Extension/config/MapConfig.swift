@@ -43,8 +43,8 @@ internal class MapConfig
     
     internal struct AreaSize
     {
-        var width:Int = 16
-        var height:Int = 16
+        var width:Int = 12
+        var height:Int = 12
     }
     
     internal struct ScreenSize
