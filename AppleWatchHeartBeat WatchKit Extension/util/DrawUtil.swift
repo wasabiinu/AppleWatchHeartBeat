@@ -68,40 +68,117 @@ internal class DrawUtil {
             var edges_cost:[Int] = [Int]()
             
             //上
-            if ((i - MapConfig.AREA_SIZE.width) >= 0)
-            {
-                edges_to.append(i - MapConfig.AREA_SIZE.width)
-                edges_cost.append(1)
-            }
-            
-            //左
-            if ((i % MapConfig.AREA_SIZE.width ) != 0 && (i - 1) >= 0)
-            {
-                edges_to.append(i - 1)
-                edges_cost.append(1)
-            }
-            
-            //右
-            if (((i + 1) % MapConfig.AREA_SIZE.width ) != 0 && (i + 1) < (MapConfig.AREA_SIZE.width * MapConfig.AREA_SIZE.height))
-            {
-                edges_to.append(i + 1)
-                edges_cost.append(1)
-            }
-            
-            //下
-            if ((i + MapConfig.AREA_SIZE.width) < (MapConfig.AREA_SIZE.width * MapConfig.AREA_SIZE.height))
-            {
-                edges_to.append(i + MapConfig.AREA_SIZE.width)
-                edges_cost.append(1)
-            }
+//            if ((i - MapConfig.AREA_SIZE.width) >= 0)
+//            {
+//                edges_to.append(i - MapConfig.AREA_SIZE.width)
+//                edges_cost.append(1)
+//            }
+//            
+//            //左
+//            if ((i % MapConfig.AREA_SIZE.width ) != 0 && (i - 1) >= 0)
+//            {
+//                edges_to.append(i - 1)
+//                edges_cost.append(1)
+//            }
+//            
+//            //右
+//            if (((i + 1) % MapConfig.AREA_SIZE.width ) != 0 && (i + 1) < (MapConfig.AREA_SIZE.width * MapConfig.AREA_SIZE.height))
+//            {
+//                edges_to.append(i + 1)
+//                edges_cost.append(1)
+//            }
+//            
+//            //下
+//            if ((i + MapConfig.AREA_SIZE.width) < (MapConfig.AREA_SIZE.width * MapConfig.AREA_SIZE.height))
+//            {
+//                edges_to.append(i + MapConfig.AREA_SIZE.width)
+//                edges_cost.append(1)
+//            }
             
             
             var node:Node = Node(edges_to: edges_to, edges_cost: edges_cost)
-            node.type = 0
+            node.type = 1
             nodes.append(node)
         }
-        deleteRandomNode()
+        diggNodes()
+//        deleteRandomNode()
         drawMap()
+    }
+    
+    private class func diggNodes()
+    {
+        var start:Int = -1
+        var now:Int = -1
+        var areaSize:Int = MapConfig.AREA_SIZE.width * MapConfig.AREA_SIZE.height
+        var route:[Int] = [Int]()
+        
+        //外周以外の1点をスタート地点に指定する
+        while (isOuterWall(start))
+        {
+            start = Int(Random.random(UInt32(areaSize)))
+        }
+        
+        route.append(start)
+        now = start
+        
+        var isMovable:Bool = false
+        while (isMovable == false)
+        {
+            var walls:[Int] = [Int]()
+            var passages:[Int] = [Int]()
+            //進んできたグリッド(routeに含まれるもの)を除いた四方向のどれかの壁を掘る
+            //戻れなくなったら終了する
+            //外周が含まれていたらwallsに追加する
+            //wallsが3つになったら、一つ前に戻る
+            //wallsに含まれていないグリッドを、passagesに追加する
+            //passagesから、ランダムで1つ選んで、edges_toに追加する
+            //同じ値を、routeにも追加する
+            //同じ値を、nowに入れて、処理を最初から繰り返す
+            var rand:Int = Int(Random.random(3))
+            switch (rand)
+            {
+                case 0:
+                    //外周だったらやりなおす
+                    if (isOuterWall(rand))
+                    {
+                        break
+                    }
+                    
+                break
+                case 1:
+                    //外周だったらやりなおす
+                    if (isOuterWall(rand))
+                    {
+                        break
+                    }
+                break
+                case 2:
+                    //外周だったらやりなおす
+                    if (isOuterWall(rand))
+                    {
+                        break
+                    }
+                    
+                break
+                default:
+                    //外周だったらやりなおす
+                    if (isOuterWall(rand))
+                    {
+                        break
+                    }
+                break
+            }
+        }
+        
+    }
+    
+    private class func isOuterWall(num:Int)->Bool
+    {
+        return num < 0 ||
+            num % MapConfig.AREA_SIZE.width == 0 || //左端
+            num % MapConfig.AREA_SIZE.width == MapConfig.AREA_SIZE.width - 1 || //右端
+            num - MapConfig.AREA_SIZE.width < 0 || //上端
+            num - MapConfig.AREA_SIZE.width * (MapConfig.AREA_SIZE.height - 1) >= 0 //下端
     }
     
     private class func deleteRandomNode()
