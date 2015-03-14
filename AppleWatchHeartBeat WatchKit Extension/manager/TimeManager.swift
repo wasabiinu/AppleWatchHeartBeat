@@ -12,11 +12,11 @@ internal class TimerManager: NSObject
     internal func start()
     {
         var refreshTime:NSTimeInterval = NSTimeInterval(1 / MapConfig.REFRESH_RATE)
-        //var timer = NSTimer.scheduledTimerWithTimeInterval(refreshTime, target: self, selector: Selector("onUpdate:"), userInfo: nil, repeats: true)
+        var timer = NSTimer.scheduledTimerWithTimeInterval(refreshTime, target: self, selector: Selector("onUpdate:"), userInfo: nil, repeats: true)
     }
     
     internal func onUpdate(timer:NSTimer)
     {
-        //DrawUtil.draw()
+        DrawUtil.draw()
     }
 }

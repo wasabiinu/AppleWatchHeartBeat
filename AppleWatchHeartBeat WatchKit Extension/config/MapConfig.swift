@@ -33,12 +33,29 @@ internal class MapConfig
         }
     }
     
+    internal class var HEARTBEAT_RATE:Int
+        {
+        get
+    {
+        return ClassProperty.heartbeatRate
+        }
+    }
+    
+    internal class var MOVE_SEC:Int
+        {
+        get
+    {
+        return ClassProperty.moveSec
+        }
+    }
     
     
     private struct ClassProperty {
         static var areaSize:AreaSize! = AreaSize()
         static var screenSize:ScreenSize = ScreenSize()
         static var refreshRate:Int = 24
+        static var heartbeatRate:Int = 80
+        static var moveSec:Int = 60 / heartbeatRate
     }
     
     internal struct AreaSize

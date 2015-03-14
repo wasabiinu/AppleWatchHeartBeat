@@ -50,11 +50,44 @@ internal class DrawUtil {
         }
     }
     
+    internal class var start:Int
+        {
+        set {
+        ClassProperty.start = newValue
+        }
+        get {
+            return ClassProperty.start
+        }
+    }
+    
+    internal class var end:Int
+        {
+        set {
+        ClassProperty.end = newValue
+        }
+        get {
+            return ClassProperty.end
+        }
+    }
+    
+    internal class var heroImage:UIImage
+        {
+        set {
+        ClassProperty.heroImage = newValue
+        }
+        get {
+            return ClassProperty.heroImage
+        }
+    }
+    
     private struct ClassProperty {
         static var delegate:MapDelegate!
         static var nodes:[Node]!
         static var mapImage:UIImage!
         static var isReady:Bool = false
+        static var start:Int = 0
+        static var end:Int = 0
+        static var heroImage:UIImage = UIImage()
     }
     
     internal class func setDelegate(delegate:MapDelegate)
@@ -77,7 +110,6 @@ internal class DrawUtil {
     
     private class func diggNodes()
     {
-        var start:Int = -1
         var now:Int = -1
         var areaSize:Int = MapConfig.AREA_SIZE.width * MapConfig.AREA_SIZE.height
         var route:[Int] = [Int]()
@@ -240,7 +272,14 @@ internal class DrawUtil {
             
         }
         
-        var end:Int = now
+        end = now
+    }
+    
+    internal class func getNodePoint(no:Int) -> [Int]
+    {
+        var x:Int = (no % MapConfig.AREA_SIZE.width) * (MapConfig.SCREEN_SIZE.width / MapConfig.AREA_SIZE.width)
+        var y:Int = (no / MapConfig.AREA_SIZE.width) * (MapConfig.SCREEN_SIZE.height / MapConfig.AREA_SIZE.height)
+        return [x, y]
     }
     
     private class func isEqualEdgeNo(no:Int, edges_to:[Int]) -> Bool
@@ -350,8 +389,7 @@ internal class DrawUtil {
             var x:CGFloat = CGFloat(i % MapConfig.AREA_SIZE.width) * rectSize.width + CGFloat(diffX / 2)
             var y:CGFloat = CGFloat(i / MapConfig.AREA_SIZE.width) * rectSize.height + CGFloat(diffY / 2)
             
-            UIGraphicsBeginImageContext(CGSizeMake(CGFloat(MapConfig.SCREEN_SIZE.width), CGFloat(MapConfig.SCREEN_SIZE.height)))
-            var cgContextRef = UIGraphicsGetCurrentContext()
+            
             
             var wall:Int = 1111
             var edges_to:[Int] = nodes[i].edges_to
@@ -400,29 +438,9 @@ internal class DrawUtil {
             
             var chipName:String = "chip" + wallString + ".png"
             
-            var image:UIImage = UIImage(named: chipName)!
+            var image:UIImage = createUIImage(chipName, x: Int(x), y: Int(y), width: Int(rectSize.width), height: Int(rectSize.height))
             
-            
-            let origRef    = image.CGImage;
-            let origWidth  = Int(CGImageGetWidth(origRef))
-            let origHeight = Int(CGImageGetHeight(origRef))
-            var resizeWidth:Int = 0, resizeHeight:Int = 0
-            
-            if (origWidth < origHeight) {
-                resizeWidth = Int(rectSize.width)
-                resizeHeight = origHeight * resizeWidth / origWidth
-            } else {
-                resizeHeight = Int(rectSize.height)
-                resizeWidth = origWidth * resizeHeight / origHeight
-            }
-            
-            image.drawInRect(CGRectMake(x, y, CGFloat(resizeWidth), CGFloat(resizeHeight)))
-            
-            let resizeImage = UIGraphicsGetImageFromCurrentImageContext()
-            
-            UIGraphicsEndImageContext()
-            
-            ary.append(resizeImage)
+            ary.append(image)
         }
         
         self.mapImage = synthesizeImage(ary)
@@ -430,12 +448,46 @@ internal class DrawUtil {
         draw()
     }
     
+    internal class func createUIImage(var name: String, var x:Int, var y:Int, var width:Int, var height:Int) -> UIImage
+    {
+        UIGraphicsBeginImageContext(CGSizeMake(CGFloat(MapConfig.SCREEN_SIZE.width), CGFloat(MapConfig.SCREEN_SIZE.height)))
+        var cgContextRef = UIGraphicsGetCurrentContext()
+        var image:UIImage = UIImage(named: name)!
+        let origRef    = image.CGImage;
+        let origWidth  = Int(CGImageGetWidth(origRef))
+        let origHeight = Int(CGImageGetHeight(origRef))
+        var resizeWidth:Int = 0, resizeHeight:Int = 0
+        
+        var rectSize:CGSize = CGSizeMake(CGFloat(width), CGFloat(height))
+        
+        if (origWidth < origHeight) {
+            resizeWidth = Int(rectSize.width)
+            resizeHeight = origHeight * resizeWidth / origWidth
+        } else {
+            resizeHeight = Int(rectSize.height)
+            resizeWidth = origWidth * resizeHeight / origHeight
+        }
+        var rect:CGRect = CGRectMake(CGFloat(x), CGFloat(y), CGFloat(resizeWidth), CGFloat(resizeHeight))
+        image.drawInRect(rect)
+        
+        let resizeImage = UIGraphicsGetImageFromCurrentImageContext()
+        
+        UIGraphicsEndImageContext()
+        
+        return resizeImage
+    }
+    
     internal class func draw()
     {
         if(isReady == true)
         {
             println("draw")
-            delegate.model.mainScene.setImage(mapImage)
+            
+            var ary:[UIImage] = [UIImage]()
+            ary.append(mapImage)
+            ary.append(heroImage)
+            
+            delegate.model.mainScene.setImage(synthesizeImage(ary))
         }
     }
     

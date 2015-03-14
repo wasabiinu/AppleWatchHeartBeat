@@ -13,16 +13,16 @@ internal class MapModel
 {
     internal var mainScene: WKInterfaceImage!
     internal var delegate:MapDelegate!
+    internal var hero:Avatar!
     init (scene:WKInterfaceImage)
     {
-        delegate = MapDelegate(model: self)
         mainScene = scene
-        
+        delegate = MapDelegate(model: self)
         DrawUtil.setDelegate(delegate)
+        
+        self.hero = Hero()
         var timeManager:TimerManager = TimerManager()
         timeManager.start()
-
-        
         //AloeTween.doTween(duration:0.042, ease: AloeEase.None, progress: DrawUtil.draw())
     }
 }
