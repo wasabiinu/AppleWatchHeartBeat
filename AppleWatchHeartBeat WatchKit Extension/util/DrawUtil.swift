@@ -70,6 +70,16 @@ internal class DrawUtil {
         }
     }
     
+    internal class var route:[Int]
+        {
+        set {
+        ClassProperty.route = newValue
+        }
+        get {
+            return ClassProperty.route
+        }
+    }
+    
     internal class var heroImage:UIImage
         {
         set {
@@ -88,6 +98,7 @@ internal class DrawUtil {
         static var start:Int = 0
         static var end:Int = 0
         static var heroImage:UIImage = UIImage()
+        static var route:[Int] = [Int]()
     }
     
     internal class func setDelegate(delegate:MapDelegate)
@@ -112,7 +123,7 @@ internal class DrawUtil {
     {
         var now:Int = -1
         var areaSize:Int = MapConfig.AREA_SIZE.width * MapConfig.AREA_SIZE.height
-        var route:[Int] = [Int]()
+        route = [Int]()
         var returns:[Int] = [Int]()
         
         //外周以外の1点をスタート地点に指定する
@@ -444,12 +455,14 @@ internal class DrawUtil {
         }
         
         self.mapImage = synthesizeImage(ary)
-        isReady = true
+        
         draw()
     }
     
     internal class func createUIImage(var name: String, var x:Int, var y:Int, var width:Int, var height:Int) -> UIImage
     {
+        println("x:\(x), y:\(y)")
+        let startDate = NSDate()
         UIGraphicsBeginImageContext(CGSizeMake(CGFloat(MapConfig.SCREEN_SIZE.width), CGFloat(MapConfig.SCREEN_SIZE.height)))
         var cgContextRef = UIGraphicsGetCurrentContext()
         var image:UIImage = UIImage(named: name)!
@@ -473,7 +486,8 @@ internal class DrawUtil {
         let resizeImage = UIGraphicsGetImageFromCurrentImageContext()
         
         UIGraphicsEndImageContext()
-        
+        let elapsed = NSDate().timeIntervalSinceDate(startDate)
+        println("createUIImage ended:\(elapsed)")
         return resizeImage
     }
     
@@ -481,9 +495,11 @@ internal class DrawUtil {
     {
         if(isReady == true)
         {
-            println("draw")
             
             var ary:[UIImage] = [UIImage]()
+            
+            DrawUtil.delegate.model.hero.createUIImage()
+            
             ary.append(mapImage)
             ary.append(heroImage)
             
@@ -492,8 +508,8 @@ internal class DrawUtil {
     }
     
     private class func synthesizeImage(ary: [UIImage]) -> UIImage {
-        println("synthesizeImage")
         
+        let startDate = NSDate()
         UIGraphicsBeginImageContextWithOptions(CGSizeMake(150,150), false, 0.0);
         for (var i:Int = 0; i < ary.count; i++)
         {
@@ -503,7 +519,8 @@ internal class DrawUtil {
         let newImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         
-        println("end synthesizeImage")
+        let elapsed = NSDate().timeIntervalSinceDate(startDate)
+        println("synthesizeImage ended:\(elapsed)")
         return newImage
     }
 }

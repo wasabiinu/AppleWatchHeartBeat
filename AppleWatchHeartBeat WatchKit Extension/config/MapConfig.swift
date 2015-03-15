@@ -25,7 +25,7 @@ internal class MapConfig
         }
     }
     
-    internal class var REFRESH_RATE:Int
+    internal class var REFRESH_RATE:Float
     {
         get
         {
@@ -33,7 +33,7 @@ internal class MapConfig
         }
     }
     
-    internal class var HEARTBEAT_RATE:Int
+    internal class var HEARTBEAT_RATE:Float
         {
         get
     {
@@ -41,7 +41,7 @@ internal class MapConfig
         }
     }
     
-    internal class var MOVE_SEC:Int
+    internal class var MOVE_SEC:Float
         {
         get
     {
@@ -53,9 +53,9 @@ internal class MapConfig
     private struct ClassProperty {
         static var areaSize:AreaSize! = AreaSize()
         static var screenSize:ScreenSize = ScreenSize()
-        static var refreshRate:Int = 24
-        static var heartbeatRate:Int = 80
-        static var moveSec:Int = 60 / heartbeatRate
+        static var refreshRate:Float = 2
+        static var heartbeatRate:Float = 80
+        static var moveSec:Float = 60 / heartbeatRate
     }
     
     internal struct AreaSize

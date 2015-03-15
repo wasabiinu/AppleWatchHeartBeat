@@ -12,39 +12,26 @@ import Foundation
 import WatchKit
 internal class Avatar
 {
-//    internal var spriteNode:SKSpriteNode
     internal var nodeNo:Int
-//    internal var walk1Textures:[SKTexture]
-//    internal var walk2Textures:[SKTexture]
-//    internal var walk3Textures:[SKTexture]
-//    internal var walk4Textures:[SKTexture]
-//    internal var walk5Textures:[SKTexture]
-    
-    
     internal var image:UIImage
     internal var walk0:[String]
     internal var walk1:[String]
     internal var walk2:[String]
     internal var walk3:[String]
     
+    var x:Int
+    var y:Int
+    var turn:Int
     
-    
-    init(let imageName:String) {
-//        var texture:SKTexture = SKTexture(imageNamed: imageName)
-//        spriteNode = SKSpriteNode(texture: texture)
-//        spriteNode.xScale = 0.5
-//        spriteNode.yScale = 0.5
-//        walk1Textures = [SKTexture]()
-//        walk2Textures = [SKTexture]()
-//        walk3Textures = [SKTexture]()
-//        walk4Textures = [SKTexture]()
-//        walk5Textures = [SKTexture]()
-        //var img:UIImage
-        
+    init(let imageName:String, startNo:Int) {
         var point:[Int] = [Int]()
-        var start:Int = DrawUtil.start
+        var start:Int = startNo
         point = DrawUtil.getNodePoint(start)
         println("point:\(point)")
+        
+        x = point[0]
+        y = point[1]
+        
         image = DrawUtil.createUIImage(imageName, x:point[0] , y: point[1], width: MapConfig.SCREEN_SIZE.width / MapConfig.AREA_SIZE.width, height: MapConfig.SCREEN_SIZE.height / MapConfig.AREA_SIZE.height)
         
         DrawUtil.heroImage = image
@@ -54,93 +41,46 @@ internal class Avatar
         walk2 = [String]()
         walk3 = [String]()
         
-        self.nodeNo = 0
+        self.nodeNo = startNo
+        
+        DrawUtil.isReady = true
+        self.turn = 0
     }
     
-//    
-//    func position(no:Int, direction:Int = 0, immidiate:Bool = false, callback:Void -> Void) {
-//        var walk:SKAction
-//        if (direction == 0 || direction == 2)
-//        {
-//            walk = SKAction.animateWithTextures(walk2Textures, timePerFrame: 0.17)
-//        }
-//        else if(direction == 1)
-//        {
-//            walk = SKAction.animateWithTextures(walk1Textures, timePerFrame: 0.17)
-//        }
-//        else if(direction == 3 || direction == 7)
-//        {
-//            walk = SKAction.animateWithTextures(walk3Textures, timePerFrame: 0.17)
-//        }
-//        else if(direction == 4 || direction == 6)
-//        {
-//            walk = SKAction.animateWithTextures(walk4Textures, timePerFrame: 0.17)
-//        }
-//        else
-//        {
-//            walk = SKAction.animateWithTextures(walk5Textures, timePerFrame: 0.17)
-//        }
-//        
-//        if (direction == 0 || direction == 6 || direction == 7)
-//        {
-//            if (self.spriteNode.xScale > 0)
-//            {
-//                self.spriteNode.xScale *= -1
-//            }
-//        }
-//        else
-//        {
-//            if (self.spriteNode.xScale < 0)
-//            {
-//                self.spriteNode.xScale *= -1
-//            }
-//        }
-//        
-//        var gridY:Int = no / Int(MapConfig.AREA_SIZE.width)
-//        var gridX:Int = no % Int(MapConfig.AREA_SIZE.width)
-//        var z:Int = -19
-//        nodeNo = no
-//        
-//        
-//        var oldX:CGFloat = spriteNode.position.x
-//        var oldY:CGFloat = spriteNode.position.y
-//        
-//        var newX:CGFloat = CGFloat(gridX * -16 + gridY * 16)
-//        var newY:CGFloat = CGFloat((gridX * -12) + (gridY * -12) - z)
-//        
-//        var diffX:CGFloat = newX - oldX
-//        var diffY:CGFloat = newY - oldY
-//        
-//        if(immidiate == true)
-//        {
-//            self.spriteNode.position = CGPointMake(newX, newY)
-//            self.spriteNode.zPosition = CGFloat(no * 2 + 1)
-//        }
-//        else
-//        {
-//            AloeTween.doTween(0.6, ease: AloeEase.None, progress: { (val) -> () in
-//                self.spriteNode.position = CGPointMake(oldX + diffX * val, oldY + diffY * val)
-//                if (direction >= 4)
-//                {
-//                    if( val >= 1)
-//                    {
-//                        self.spriteNode.zPosition = CGFloat(no * 2 + 1)
-//                    }
-//                }
-//                else
-//                {
-//                    if( val >= 0.1)
-//                    {
-//                        self.spriteNode.zPosition = CGFloat(no * 2 + 1)
-//                    }
-//                }
-//                if( val >= 1)
-//                {
-//                    callback()
-//                }
-//                
-//            })
-//            spriteNode.runAction(walk)
-//        }
-//    }
+
+    internal func position(no:Int, direction:Int = 0, immidiate:Bool = false, callback:Void -> Void) {
+        
+        var oldNo:Int = self.nodeNo
+        var newNo:Int = no
+        
+        self.nodeNo = newNo
+        
+        var oldX:Int = DrawUtil.getNodePoint(oldNo)[0]
+        var oldY:Int = DrawUtil.getNodePoint(oldNo)[1]
+        
+        var xDiff:Int = DrawUtil.getNodePoint(newNo)[0] - oldX
+        var yDiff:Int = DrawUtil.getNodePoint(newNo)[1] - oldY
+        
+        AloeTween.doTween(0.6, ease: AloeEase.None, progress: { (val) -> () in
+            
+            var x:Int = Int(Float(oldX) + Float(xDiff) * Float(val))
+            var y:Int = Int(Float(oldY) + Float(yDiff) * Float(val))
+            
+            self.x = x
+            self.y = y
+            if( val >= 1)
+            {
+                callback()
+            }
+            
+        })
+    }
+    
+    internal func createUIImage()
+    {
+        var cgNo:Int = turn % 3
+        self.image = DrawUtil.createUIImage(self.walk0[cgNo], x:self.x , y: self.y, width: MapConfig.SCREEN_SIZE.width / MapConfig.AREA_SIZE.width, height: MapConfig.SCREEN_SIZE.height / MapConfig.AREA_SIZE.height)
+        
+        DrawUtil.heroImage = self.image
+    }
 }

@@ -9,7 +9,7 @@
 import Foundation
 internal class Human: Avatar
 {
-    override init(let imageName:String) {
-        super.init(imageName: imageName)
+    override init(let imageName:String, startNo:Int) {
+        super.init(imageName: imageName, startNo:startNo)
     }
 }

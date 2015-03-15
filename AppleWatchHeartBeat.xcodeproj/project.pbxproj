@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2041D6971AB46E99000F2A93 /* MapUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2041D6961AB46E99000F2A93 /* MapUtil.swift */; };
+		2041D6991AB471D9000F2A93 /* UIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2041D6981AB471D9000F2A93 /* UIModel.swift */; };
+		2041D69B1AB47630000F2A93 /* UIDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2041D69A1AB47630000F2A93 /* UIDelegate.swift */; };
+		2041D69E1AB4771D000F2A93 /* HeroManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2041D69D1AB4771D000F2A93 /* HeroManager.swift */; };
+		208C34DE1AB56ECB008F71CC /* Benchmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208C34DD1AB56ECB008F71CC /* Benchmark.swift */; };
 		20A07EDF1AB0601A00298C98 /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A07EDE1AB0601A00298C98 /* TimeManager.swift */; };
 		20A07EE11AB1BDC900298C98 /* RouteUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A07EE01AB1BDC900298C98 /* RouteUtil.swift */; };
 		20A07EE31AB1BDF000298C98 /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A07EE21AB1BDF000298C98 /* Random.swift */; };
@@ -28,6 +33,7 @@
 		20E0A1631AAF3D930031BAF1 /* AppleWatchHeartBeat WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 20E0A1481AAF3D920031BAF1 /* AppleWatchHeartBeat WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		20E0A16D1AAF3DB40031BAF1 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20E0A16C1AAF3DB40031BAF1 /* HealthKit.framework */; };
 		20E0A16F1AAF3DC50031BAF1 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20E0A16C1AAF3DB40031BAF1 /* HealthKit.framework */; };
+		20F768861AB48944005808D9 /* UIUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F768851AB48944005808D9 /* UIUtil.swift */; };
 		C34829581AAFF2DF00E2542F /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34829571AAFF2DF00E2542F /* Node.swift */; };
 		C348295D1AAFF4AD00E2542F /* MapConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = C348295C1AAFF4AD00E2542F /* MapConfig.swift */; };
 		C365DF201AAFD77F000ABF21 /* DrawUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C365DF1F1AAFD77F000ABF21 /* DrawUtil.swift */; };
@@ -77,6 +83,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2041D6961AB46E99000F2A93 /* MapUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapUtil.swift; sourceTree = "<group>"; };
+		2041D6981AB471D9000F2A93 /* UIModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIModel.swift; sourceTree = "<group>"; };
+		2041D69A1AB47630000F2A93 /* UIDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIDelegate.swift; sourceTree = "<group>"; };
+		2041D69D1AB4771D000F2A93 /* HeroManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeroManager.swift; sourceTree = "<group>"; };
+		208C34DD1AB56ECB008F71CC /* Benchmark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Benchmark.swift; sourceTree = "<group>"; };
 		20A07EDE1AB0601A00298C98 /* TimeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
 		20A07EE01AB1BDC900298C98 /* RouteUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteUtil.swift; sourceTree = "<group>"; };
 		20A07EE21AB1BDF000298C98 /* Random.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Random.swift; sourceTree = "<group>"; };
@@ -106,6 +117,7 @@
 		20E0A16B1AAF3DA90031BAF1 /* AppleWatchHeartBeat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = AppleWatchHeartBeat.entitlements; sourceTree = "<group>"; };
 		20E0A16C1AAF3DB40031BAF1 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		20E0A16E1AAF3DC30031BAF1 /* AppleWatchHeartBeat WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "AppleWatchHeartBeat WatchKit Extension.entitlements"; sourceTree = "<group>"; };
+		20F768851AB48944005808D9 /* UIUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIUtil.swift; sourceTree = "<group>"; };
 		C34829571AAFF2DF00E2542F /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		C348295C1AAFF4AD00E2542F /* MapConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapConfig.swift; sourceTree = "<group>"; };
 		C365DF1F1AAFD77F000ABF21 /* DrawUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawUtil.swift; sourceTree = "<group>"; };
@@ -147,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				20A07EDE1AB0601A00298C98 /* TimeManager.swift */,
+				2041D69D1AB4771D000F2A93 /* HeroManager.swift */,
 			);
 			path = manager;
 			sourceTree = "<group>";
@@ -301,6 +314,9 @@
 				C365DF2A1AAFE971000ABF21 /* Twen.swift */,
 				20A07EE01AB1BDC900298C98 /* RouteUtil.swift */,
 				20A07EE21AB1BDF000298C98 /* Random.swift */,
+				2041D6961AB46E99000F2A93 /* MapUtil.swift */,
+				20F768851AB48944005808D9 /* UIUtil.swift */,
+				208C34DD1AB56ECB008F71CC /* Benchmark.swift */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -309,6 +325,7 @@
 			isa = PBXGroup;
 			children = (
 				C365DF221AAFDACB000ABF21 /* MapModel.swift */,
+				2041D6981AB471D9000F2A93 /* UIModel.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -334,6 +351,7 @@
 			isa = PBXGroup;
 			children = (
 				C37FDA641AAFEC78003AE3F1 /* MapDelegate.swift */,
+				2041D69A1AB47630000F2A93 /* UIDelegate.swift */,
 			);
 			path = delegate;
 			sourceTree = "<group>";
@@ -535,8 +553,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2041D69B1AB47630000F2A93 /* UIDelegate.swift in Sources */,
 				C348295D1AAFF4AD00E2542F /* MapConfig.swift in Sources */,
 				C365DF291AAFE955000ABF21 /* AloeTween.swift in Sources */,
+				2041D6971AB46E99000F2A93 /* MapUtil.swift in Sources */,
+				2041D6991AB471D9000F2A93 /* UIModel.swift in Sources */,
+				208C34DE1AB56ECB008F71CC /* Benchmark.swift in Sources */,
 				20A07EE31AB1BDF000298C98 /* Random.swift in Sources */,
 				20C412ED1AB4323B00C4E689 /* Hero.swift in Sources */,
 				C365DF2B1AAFE971000ABF21 /* Twen.swift in Sources */,
@@ -545,10 +567,12 @@
 				C365DF231AAFDACB000ABF21 /* MapModel.swift in Sources */,
 				20C412EB1AB4321C00C4E689 /* Human.swift in Sources */,
 				C34829581AAFF2DF00E2542F /* Node.swift in Sources */,
+				2041D69E1AB4771D000F2A93 /* HeroManager.swift in Sources */,
 				20A07EDF1AB0601A00298C98 /* TimeManager.swift in Sources */,
 				20E0A1501AAF3D920031BAF1 /* NotificationController.swift in Sources */,
 				20E0A14E1AAF3D920031BAF1 /* InterfaceController.swift in Sources */,
 				C37FDA651AAFEC78003AE3F1 /* MapDelegate.swift in Sources */,
+				20F768861AB48944005808D9 /* UIUtil.swift in Sources */,
 				C365DF271AAFE93C000ABF21 /* AloeEase.swift in Sources */,
 				C365DF201AAFD77F000ABF21 /* DrawUtil.swift in Sources */,
 			);

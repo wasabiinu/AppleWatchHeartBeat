@@ -10,7 +10,7 @@ import Foundation
 internal class Hero: Human
 {
     init() {
-        super.init(imageName: "human.avatar.hero.0.0.png")
+        super.init(imageName: "human.avatar.hero.0.0.png", startNo: DrawUtil.start)
         
         super.walk0.append("human.avatar.hero.0.0.png")
         super.walk0.append("human.avatar.hero.0.1.png")
