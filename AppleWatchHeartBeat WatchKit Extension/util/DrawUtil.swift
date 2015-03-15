@@ -100,6 +100,16 @@ internal class DrawUtil {
         }
     }
     
+    internal class var animationImage:UIImage
+        {
+        set {
+        ClassProperty.animationImage = newValue
+        }
+        get {
+            return ClassProperty.animationImage
+        }
+    }
+    
     private struct ClassProperty {
         static var delegate:MapDelegate!
         static var nodes:[Node]!
@@ -110,6 +120,7 @@ internal class DrawUtil {
         static var heroImage:UIImage = UIImage()
         static var route:[Int] = [Int]()
         static var imageArray:[UIImage] = [UIImage]()
+        static var animationImage:UIImage = UIImage()
     }
     
     internal class func setDelegate(delegate:MapDelegate)
@@ -509,9 +520,9 @@ internal class DrawUtil {
             let startDate = NSDate()
             var animatedImage:UIImage = animatedUIImage()
             delegate.model.mainScene.setImage(animatedImage)
+            //self.animationImage = animatedImage
             var range:NSRange = NSMakeRange(0, 14)
             delegate.model.mainScene.startAnimatingWithImagesInRange(range, duration: NSTimeInterval(MapConfig.MOVE_SEC), repeatCount: 1)
-            //delegate.model.mainScene.startAnimating()
             imageArray = [UIImage]()
             let elapsed = NSDate().timeIntervalSinceDate(startDate)
             println("draw:\(elapsed) sec")

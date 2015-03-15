@@ -23,6 +23,8 @@ internal class MapModel
         self.hero = Hero()
         var timeManager:TimerManager = TimerManager()
         timeManager.start()
+        
+        //self.mainScene.setImage(DrawUtil.animationImage)
         //AloeTween.doTween(duration:0.042, ease: AloeEase.None, progress: DrawUtil.draw())
     }
 }
