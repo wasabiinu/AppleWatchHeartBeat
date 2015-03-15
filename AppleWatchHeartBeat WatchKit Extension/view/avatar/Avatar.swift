@@ -21,6 +21,7 @@ internal class Avatar
     
     var x:Int
     var y:Int
+    var direction:Int
     var turn:Int
     
     init(let imageName:String, startNo:Int) {
@@ -29,8 +30,9 @@ internal class Avatar
         point = DrawUtil.getNodePoint(start)
         println("point:\(point)")
         
-        x = point[0]
-        y = point[1]
+        self.x = point[0]
+        self.y = point[1]
+        self.direction = 0
         
         image = DrawUtil.createUIImage(imageName, x:point[0] , y: point[1], width: MapConfig.SCREEN_SIZE.width / MapConfig.AREA_SIZE.width, height: MapConfig.SCREEN_SIZE.height / MapConfig.AREA_SIZE.height)
         
@@ -52,7 +54,7 @@ internal class Avatar
         
         var oldNo:Int = self.nodeNo
         var newNo:Int = no
-        
+        self.direction = direction
         self.nodeNo = newNo
         
         var oldX:Int = DrawUtil.getNodePoint(oldNo)[0]
@@ -61,26 +63,60 @@ internal class Avatar
         var xDiff:Int = DrawUtil.getNodePoint(newNo)[0] - oldX
         var yDiff:Int = DrawUtil.getNodePoint(newNo)[1] - oldY
         
-        AloeTween.doTween(0.6, ease: AloeEase.None, progress: { (val) -> () in
-            
-            var x:Int = Int(Float(oldX) + Float(xDiff) * Float(val))
-            var y:Int = Int(Float(oldY) + Float(yDiff) * Float(val))
-            
-            self.x = x
-            self.y = y
-            if( val >= 1)
-            {
-                callback()
-            }
-            
-        })
+        println("x:\(DrawUtil.getNodePoint(newNo)[0]), y:\(DrawUtil.getNodePoint(newNo)[1])")
+        
+        var spliteRate:Int = Int(Float(MapConfig.REFRESH_RATE) * MapConfig.MOVE_SEC)
+        //println("spliteRate:\(spliteRate)")
+        for( var i:Int = 0; i < spliteRate; i++)
+        {
+            self.x = oldX + (i + 1) * xDiff / spliteRate + 3
+            self.y = oldY + (i + 1) * yDiff / spliteRate
+            createUIImage()
+            DrawUtil.stockImages(self.image)
+        }
+        
+//        AloeTween.doTween(0.6, ease: AloeEase.None, progress: { (val) -> () in
+//            
+//            var x:Int = Int(Float(oldX) + Float(xDiff) * Float(val)) + 3
+//            var y:Int = Int(Float(oldY) + Float(yDiff) * Float(val))
+//            
+//            self.x = x
+//            self.y = y
+//            self.direction = direction
+//            if( val >= 1)
+//            {
+//                callback()
+//            }
+//            
+//        })
     }
     
     internal func createUIImage()
     {
+        
+        var imageName:String = ""
         var cgNo:Int = turn % 3
-        self.image = DrawUtil.createUIImage(self.walk0[cgNo], x:self.x , y: self.y, width: MapConfig.SCREEN_SIZE.width / MapConfig.AREA_SIZE.width, height: MapConfig.SCREEN_SIZE.height / MapConfig.AREA_SIZE.height)
+        switch (self.direction)
+        {
+            case 0:
+                imageName = self.walk0[cgNo]
+            break
+            case 1:
+                imageName = self.walk1[cgNo]
+            break
+            case 2:
+                imageName = self.walk2[cgNo]
+            break
+            default:
+                imageName = self.walk3[cgNo]
+            break
+        }
+        
+        
+        self.image = DrawUtil.createUIImage(imageName, x:self.x , y: self.y, width: MapConfig.SCREEN_SIZE.width / MapConfig.AREA_SIZE.width, height: MapConfig.SCREEN_SIZE.height / MapConfig.AREA_SIZE.height)
         
         DrawUtil.heroImage = self.image
+        
+        turn++
     }
 }

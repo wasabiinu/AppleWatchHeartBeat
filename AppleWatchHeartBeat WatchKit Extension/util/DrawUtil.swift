@@ -90,6 +90,16 @@ internal class DrawUtil {
         }
     }
     
+    internal class var imageArray:[UIImage]
+        {
+        set {
+        ClassProperty.imageArray = newValue
+        }
+        get {
+            return ClassProperty.imageArray
+        }
+    }
+    
     private struct ClassProperty {
         static var delegate:MapDelegate!
         static var nodes:[Node]!
@@ -99,6 +109,7 @@ internal class DrawUtil {
         static var end:Int = 0
         static var heroImage:UIImage = UIImage()
         static var route:[Int] = [Int]()
+        static var imageArray:[UIImage] = [UIImage]()
     }
     
     internal class func setDelegate(delegate:MapDelegate)
@@ -456,12 +467,12 @@ internal class DrawUtil {
         
         self.mapImage = synthesizeImage(ary)
         
-        draw()
+        //draw()
     }
     
     internal class func createUIImage(var name: String, var x:Int, var y:Int, var width:Int, var height:Int) -> UIImage
     {
-        println("x:\(x), y:\(y)")
+        //println("x:\(x), y:\(y)")
         let startDate = NSDate()
         UIGraphicsBeginImageContext(CGSizeMake(CGFloat(MapConfig.SCREEN_SIZE.width), CGFloat(MapConfig.SCREEN_SIZE.height)))
         var cgContextRef = UIGraphicsGetCurrentContext()
@@ -487,7 +498,7 @@ internal class DrawUtil {
         
         UIGraphicsEndImageContext()
         let elapsed = NSDate().timeIntervalSinceDate(startDate)
-        println("createUIImage ended:\(elapsed)")
+        //println("createUIImage ended:\(elapsed)")
         return resizeImage
     }
     
@@ -495,16 +506,41 @@ internal class DrawUtil {
     {
         if(isReady == true)
         {
-            
+            let startDate = NSDate()
+            var animatedImage:UIImage = animatedUIImage()
+            delegate.model.mainScene.setImage(animatedImage)
+            var range:NSRange = NSMakeRange(0, 14)
+            delegate.model.mainScene.startAnimatingWithImagesInRange(range, duration: NSTimeInterval(MapConfig.MOVE_SEC), repeatCount: 1)
+            //delegate.model.mainScene.startAnimating()
+            imageArray = [UIImage]()
+            let elapsed = NSDate().timeIntervalSinceDate(startDate)
+            println("draw:\(elapsed) sec")
+        }
+    }
+    
+    internal class func stockImages(image:UIImage)
+    {
+        if(isReady == true)
+        {
+            //println("stockImages")
             var ary:[UIImage] = [UIImage]()
-            
             DrawUtil.delegate.model.hero.createUIImage()
             
             ary.append(mapImage)
             ary.append(heroImage)
-            
-            delegate.model.mainScene.setImage(synthesizeImage(ary))
+            var image:UIImage = synthesizeImage(ary)
+            imageArray.append(image)
         }
+    }
+    
+    internal class func animatedUIImage() -> UIImage
+    {
+        var duration: NSTimeInterval = NSTimeInterval(MapConfig.MOVE_SEC)
+        println("duration:\(duration)")
+        var image:UIImage = UIImage.animatedImageWithImages(self.imageArray, duration: duration)
+        println(image.duration)
+        return image
+        
     }
     
     private class func synthesizeImage(ary: [UIImage]) -> UIImage {
@@ -520,7 +556,7 @@ internal class DrawUtil {
         UIGraphicsEndImageContext();
         
         let elapsed = NSDate().timeIntervalSinceDate(startDate)
-        println("synthesizeImage ended:\(elapsed)")
+        //println("synthesizeImage ended:\(elapsed)")
         return newImage
     }
 }
