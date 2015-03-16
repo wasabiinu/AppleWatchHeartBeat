@@ -11,7 +11,6 @@ import Foundation
 
 class InterfaceController: WKInterfaceController {
     
-    @IBOutlet weak var button0: WKInterfaceButton!
     @IBOutlet weak var mainScene: WKInterfaceImage!
     var mapModel:MapModel!
     var uiModel:UIModel!
@@ -28,9 +27,6 @@ class InterfaceController: WKInterfaceController {
     
     override func didDeactivate() {
         super.didDeactivate()
-    }
-    
-    @IBAction func onTouchButton0() {
     }
 //    @IBAction func onTouchButton0() {
 //        uiModel.onTouchButton0()

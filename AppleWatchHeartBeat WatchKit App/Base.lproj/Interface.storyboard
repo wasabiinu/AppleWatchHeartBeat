@@ -11,14 +11,8 @@
                 <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="AppleWatchHeartBeat_WatchKit_App" customModuleProvider="target">
                     <items>
                         <imageView width="150" height="150" alignment="left" id="7yw-Be-Lbh"/>
-                        <button width="1" alignment="left" title="Button" id="KEl-Ow-3me">
-                            <connections>
-                                <action selector="onTouchButton0" destination="AgC-eL-Hgc" id="HcO-1c-fhi"/>
-                            </connections>
-                        </button>
                     </items>
                     <connections>
-                        <outlet property="button0" destination="KEl-Ow-3me" id="cqJ-Lj-kWl"/>
                         <outlet property="mainScene" destination="7yw-Be-Lbh" id="qgA-q9-1VX"/>
                     </connections>
                 </controller>
