@@ -10,9 +10,9 @@ import WatchKit
 
 class UIDelegate {
     var model:UIModel;
-    var scene:WKInterfaceImage
+    var scene:WKInterfaceGroup
     
-    init (model:UIModel, scene:WKInterfaceImage)
+    init (model:UIModel, scene:WKInterfaceGroup)
     {
         self.model = model
         self.scene = scene

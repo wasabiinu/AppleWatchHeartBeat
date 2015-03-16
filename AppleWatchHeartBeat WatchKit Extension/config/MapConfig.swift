@@ -53,8 +53,8 @@ internal class MapConfig
     private struct ClassProperty {
         static var areaSize:AreaSize! = AreaSize()
         static var screenSize:ScreenSize = ScreenSize()
-        static var refreshRate:Float = 4
-        static var heartbeatRate:Float = 40
+        static var refreshRate:Float = 10
+        static var heartbeatRate:Float = 80
         static var moveSec:Float = 60 / heartbeatRate
     }
     

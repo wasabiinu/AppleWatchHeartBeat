@@ -11,12 +11,14 @@ import WatchKit
 
 internal class MapModel
 {
-    internal var mainScene: WKInterfaceImage!
+    internal var mainScene: WKInterfaceGroup!
+    internal var heroLayer: WKInterfaceImage!
     internal var delegate:MapDelegate!
     internal var hero:Avatar!
-    init (scene:WKInterfaceImage)
+    init (scene:WKInterfaceGroup, heroLayer:WKInterfaceImage)
     {
-        mainScene = scene
+        self.mainScene = scene
+        self.heroLayer = heroLayer
         delegate = MapDelegate(model: self)
         DrawUtil.setDelegate(delegate)
         

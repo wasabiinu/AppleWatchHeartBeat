@@ -12,9 +12,9 @@ import WatchKit
 class UIModel {
     var delegate:UIDelegate!;
     var lock:Bool
-    var scene:WKInterfaceImage
+    var scene:WKInterfaceGroup
     
-    init (scene:WKInterfaceImage)
+    init (scene:WKInterfaceGroup)
     {
         self.scene = scene
         println("UIModel::init")

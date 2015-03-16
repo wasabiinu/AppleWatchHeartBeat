@@ -10,14 +10,25 @@
             <objects>
                 <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="AppleWatchHeartBeat_WatchKit_App" customModuleProvider="target">
                     <items>
-                        <imageView width="150" height="150" alignment="left" id="7yw-Be-Lbh"/>
+                        <group width="1" height="150" alignment="left" id="sGu-wa-ZqO">
+                            <items>
+                                <group width="1" height="150" alignment="left" id="XDZ-O2-guk">
+                                    <items>
+                                        <imageView width="150" height="150" alignment="left" id="IAZ-qj-euJ"/>
+                                    </items>
+                                </group>
+                                <imageView width="150" height="150" alignment="left" id="1FR-nC-v4H"/>
+                            </items>
+                        </group>
                     </items>
                     <connections>
-                        <outlet property="mainScene" destination="7yw-Be-Lbh" id="qgA-q9-1VX"/>
+                        <outlet property="heroLayer" destination="IAZ-qj-euJ" id="phh-12-Bv2"/>
+                        <outlet property="mainContainer" destination="XDZ-O2-guk" id="QtV-qy-SHf"/>
+                        <outlet property="mapLayer" destination="1FR-nC-v4H" id="BvK-dE-MDh"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="220" y="345.5"/>
+            <point key="canvasLocation" x="220" y="345"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">

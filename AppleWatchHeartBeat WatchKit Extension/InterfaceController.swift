@@ -11,7 +11,10 @@ import Foundation
 
 class InterfaceController: WKInterfaceController {
     
-    @IBOutlet weak var mainScene: WKInterfaceImage!
+    //@IBOutlet weak var mainScene: WKInterfaceImage!
+    @IBOutlet weak var mapLayer: WKInterfaceImage!
+    @IBOutlet weak var heroLayer: WKInterfaceImage!
+    @IBOutlet weak var mainContainer: WKInterfaceGroup!
     var mapModel:MapModel!
     var uiModel:UIModel!
     override func awakeWithContext(context: AnyObject?) {
@@ -21,8 +24,10 @@ class InterfaceController: WKInterfaceController {
     
     override func willActivate() {
         super.willActivate()
-        mapModel = MapModel(scene: mainScene)
-        uiModel = UIModel(scene: mainScene)
+       
+        
+        mapModel = MapModel(scene: mainContainer, heroLayer: heroLayer)
+        uiModel = UIModel(scene: mainContainer)
     }
     
     override func didDeactivate() {

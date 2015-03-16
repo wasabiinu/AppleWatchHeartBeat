@@ -477,6 +477,8 @@ internal class DrawUtil {
         }
         
         self.mapImage = synthesizeImage(ary)
+        delegate.model.mainScene.setBackgroundImage(self.mapImage)
+        //setImage(self.mapImage)
         
         //draw()
     }
@@ -519,10 +521,10 @@ internal class DrawUtil {
         {
             let startDate = NSDate()
             var animatedImage:UIImage = animatedUIImage()
-            delegate.model.mainScene.setImage(animatedImage)
-            //self.animationImage = animatedImage
+            delegate.model.heroLayer.setImage(animatedImage)
+            self.animationImage = animatedImage
             var range:NSRange = NSMakeRange(0, 14)
-            delegate.model.mainScene.startAnimatingWithImagesInRange(range, duration: NSTimeInterval(MapConfig.MOVE_SEC), repeatCount: 1)
+            delegate.model.heroLayer.startAnimatingWithImagesInRange(range, duration: NSTimeInterval(MapConfig.MOVE_SEC), repeatCount: 1)
             imageArray = [UIImage]()
             let elapsed = NSDate().timeIntervalSinceDate(startDate)
             println("draw:\(elapsed) sec")
@@ -537,7 +539,7 @@ internal class DrawUtil {
             var ary:[UIImage] = [UIImage]()
             DrawUtil.delegate.model.hero.createUIImage()
             
-            ary.append(mapImage)
+            //ary.append(mapImage)
             ary.append(heroImage)
             var image:UIImage = synthesizeImage(ary)
             imageArray.append(image)
